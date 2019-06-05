@@ -1,0 +1,73 @@
+package com.app.medicalrestserver.service;
+
+
+import com.app.medicalrestserver.dto.DoctorDto;
+import com.app.medicalrestserver.dto.mappers.ModelMapper;
+import com.app.medicalrestserver.exceptions.MyException;
+import com.app.medicalrestserver.model.Doctor;
+import com.app.medicalrestserver.repository.DoctorRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Slf4j
+@Service
+public class DoctorService {
+
+
+    private DoctorRepository doctorRepository;
+    private ModelMapper modelMapper;
+
+    @Autowired
+    public DoctorService(DoctorRepository doctorRepository, ModelMapper modelMapper) {
+        this.doctorRepository = doctorRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    private static Logger logger = LoggerFactory.getLogger(PatientService.class);
+
+
+    public DoctorDto addDoctort(DoctorDto doctorDto) {
+        try {
+            if (doctorDto == null && doctorDto.getId() != null) {
+                throw new NullPointerException("PATIENT OBJECT IS NOT CORRECT");
+            }
+            Doctor doctor1 = modelMapper.fromDoctorDtoToDoctor(doctorDto);
+            doctorRepository.save(doctor1);
+            return modelMapper.fromDoctorToDoctorDto(doctor1);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MyException("CREATE DOCTOR");
+        }
+    }
+
+    public List<DoctorDto> getAllDoctors() {
+        try {
+            return doctorRepository
+                    .findAll()
+                    .stream()
+                    .map(modelMapper::fromDoctorToDoctorDto)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MyException("GET ALL DOCTORS");
+        }
+    }
+
+
+    public DoctorDto deleteDoctor(Long id) {
+        try {
+            Doctor doctor = doctorRepository.findById(id).orElseThrow(NullPointerException::new);
+            doctorRepository.delete(doctor);
+            return modelMapper.fromDoctorToDoctorDto(doctor);
+        }catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MyException("DELETE DOCTOR");
+        }
+    }
+}
