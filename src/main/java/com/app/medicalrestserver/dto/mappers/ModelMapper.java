@@ -44,7 +44,7 @@ public class ModelMapper {
                 .email(doctor.getEmail())
                 .name(doctor.getName())
                 .surname(doctor.getSurname())
-                .login(doctor.getPassword())
+                .login(doctor.getLogin())
                 .specialization(doctor.getSpecialization())
                 .visitList(doctor.getVisitList())
                 .password(doctor.getPassword())
@@ -68,9 +68,9 @@ public class ModelMapper {
         return visit == null ? null : VisitDto.builder()
                 .date(visit.getDate())
                 .description(visit.getDescription())
-                .doctor(visit.getDoctor())
-                .patient(visit.getPatient())
                 .id(visit.getId())
+                .doctorId(visit.getDoctor().getId())
+                .patientId(visit.getPatient().getId())
                 .build();
     }
 
@@ -78,8 +78,6 @@ public class ModelMapper {
         return visitDto == null ? null : Visit.builder()
                 .date(visitDto.getDate())
                 .description(visitDto.getDescription())
-                .doctor(visitDto.getDoctor())
-                .patient(visitDto.getPatient())
                 .id(visitDto.getId())
                 .build();
     }

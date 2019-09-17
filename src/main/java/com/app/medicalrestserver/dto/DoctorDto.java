@@ -9,11 +9,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DoctorDto {
 
     private Long id;
@@ -24,5 +25,5 @@ public class DoctorDto {
     private Specialization specialization;
     private String password;
     private String passwordConfirmation;
-    private List<Visit> visitList;
+    private Set<Visit> visitList;
 }

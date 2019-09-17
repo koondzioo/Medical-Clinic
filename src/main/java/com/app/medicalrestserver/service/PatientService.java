@@ -5,6 +5,7 @@ import com.app.medicalrestserver.dto.PatientDto;
 import com.app.medicalrestserver.dto.mappers.ModelMapper;
 import com.app.medicalrestserver.exceptions.MyException;
 import com.app.medicalrestserver.model.Patient;
+import com.app.medicalrestserver.model.Visit;
 import com.app.medicalrestserver.repository.PatientRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,6 +70,15 @@ public class PatientService {
         }catch (Exception e) {
             logger.error(e.getMessage());
             throw new MyException("DELETE PATIENT");
+        }
+    }
+
+    public PatientDto findPatientById(Long id){
+        try {
+            return modelMapper.fromPatientToPatientDto(patientRepository.findById(id).orElseThrow(NullPointerException::new));
+        }catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new MyException("FIND PATIENT BY ID");
         }
     }
 }

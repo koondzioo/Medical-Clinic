@@ -1,5 +1,6 @@
 package com.app.medicalrestserver.dto;
 
+
 import com.app.medicalrestserver.model.Visit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,11 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PatientDto {
 
     private Long id;
@@ -22,5 +24,5 @@ public class PatientDto {
     private Integer age;
     private String password;
     private String passwordConfirmation;
-    private List<Visit> visitList;
+    private Set<Visit> visitList;
 }

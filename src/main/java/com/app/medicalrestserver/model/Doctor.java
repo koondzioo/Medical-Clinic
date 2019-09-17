@@ -1,12 +1,12 @@
 package com.app.medicalrestserver.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +27,9 @@ public class Doctor {
     private String password;
     @Transient
     private String passwordConfirmation;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "doctor")
-    private List<Visit> visitList;
+    @OneToMany(mappedBy = "doctor")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Visit> visitList = new LinkedHashSet<>();
 
 }

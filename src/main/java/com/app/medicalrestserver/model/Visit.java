@@ -1,9 +1,6 @@
 package com.app.medicalrestserver.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,10 +17,10 @@ public class Visit {
     @GeneratedValue
     private Long id;
     private LocalDate date;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "doctor_id" )
     private Doctor doctor;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "patient_id" )
     private Patient patient;
     private String description;

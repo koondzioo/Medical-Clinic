@@ -3,6 +3,7 @@ package com.app.medicalrestserver.controller;
 
 import com.app.medicalrestserver.dto.DoctorDto;
 import com.app.medicalrestserver.dto.PatientDto;
+import com.app.medicalrestserver.model.Specialization;
 import com.app.medicalrestserver.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,10 @@ public class DoctorController {
     @DeleteMapping("/{id}")
     public DoctorDto deleteDoctor(@PathVariable Long id){
         return doctorService.deleteDoctor(id);
+    }
+
+    @GetMapping("/{specialization}")
+    public List<DoctorDto> getDoctorsBySpecialization(@PathVariable Specialization specialization){
+        return doctorService.getDoctorsBySpecialization(specialization);
     }
 }
