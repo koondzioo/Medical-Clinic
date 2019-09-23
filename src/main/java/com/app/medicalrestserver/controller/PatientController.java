@@ -27,6 +27,11 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
+    @GetMapping("search/{id}")
+    public PatientDto getPatientById(@PathVariable Long id) {
+        return patientService.findPatientById(id);
+    }
+
     @DeleteMapping("/{id}")
     public PatientDto deletePatient(@PathVariable Long id){
         return patientService.deletePatient(id);

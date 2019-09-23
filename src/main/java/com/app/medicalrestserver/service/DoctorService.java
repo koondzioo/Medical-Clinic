@@ -8,6 +8,7 @@ import com.app.medicalrestserver.model.Doctor;
 import com.app.medicalrestserver.model.Specialization;
 import com.app.medicalrestserver.model.Visit;
 import com.app.medicalrestserver.repository.DoctorRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +21,16 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class DoctorService {
 
 
     private DoctorRepository doctorRepository;
     private ModelMapper modelMapper;
+
+    public DoctorService(DoctorRepository doctorRepository) {
+        this.doctorRepository = doctorRepository;
+    }
 
     @Autowired
     public DoctorService(DoctorRepository doctorRepository, ModelMapper modelMapper) {
@@ -35,7 +41,7 @@ public class DoctorService {
     private static Logger logger = LoggerFactory.getLogger(PatientService.class);
 
 
-    public DoctorDto addDoctort(DoctorDto doctorDto) {
+    public DoctorDto addDoctor(DoctorDto doctorDto) {
         try {
             if (doctorDto == null && doctorDto.getId() != null) {
                 throw new NullPointerException("PATIENT OBJECT IS NOT CORRECT");
@@ -58,6 +64,7 @@ public class DoctorService {
                     .collect(Collectors.toList());
         } catch (Exception e) {
             logger.error(e.getMessage());
+            e.printStackTrace();
             throw new MyException("GET ALL DOCTORS");
         }
     }
@@ -90,13 +97,17 @@ public class DoctorService {
 
     public DoctorDto findDoctorById(Long id){
         try{
+            System.out.println("service" + doctorRepository.findById(id));
             return modelMapper.fromDoctorToDoctorDto(doctorRepository.findById(id).orElseThrow(NullPointerException::new));
         }catch (Exception e){
             logger.error(e.getMessage());
+            e.printStackTrace();
             throw new MyException("FIND DOCTOR BY ID EXCEPTION");
         }
     }
 
+    // TODO Update Doctor
+    /*
     public DoctorDto updateDoctor(DoctorDto doctorDto) {
         try {
             Doctor doctor = modelMapper.fromDoctorDtoToDoctor(doctorDto);
@@ -107,4 +118,6 @@ public class DoctorService {
             throw new MyException("UPDATE DOCTOR EXCEPTION");
         }
     }
+
+     */
 }

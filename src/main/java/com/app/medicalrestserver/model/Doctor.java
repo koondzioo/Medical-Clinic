@@ -1,5 +1,6 @@
 package com.app.medicalrestserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Doctor {
     private String passwordConfirmation;
     @OneToMany(mappedBy = "doctor")
     @ToString.Exclude
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
     private Set<Visit> visitList = new LinkedHashSet<>();
 

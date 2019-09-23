@@ -29,7 +29,7 @@ public class VisitController {
 
 
     @GetMapping("/{id}")
-    public VisitDto showVisitDetails(@PathVariable Long id) {
+    public VisitDto showVisitById(@PathVariable Long id) {
         return visitService.getVisitById(id);
     }
 
