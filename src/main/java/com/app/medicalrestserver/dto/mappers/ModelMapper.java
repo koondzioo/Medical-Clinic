@@ -9,9 +9,9 @@ import com.app.medicalrestserver.model.Visit;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ModelMapper {
+public interface ModelMapper {
 
-    public PatientDto fromPatientToPatientDto(Patient patient) {
+    static PatientDto fromPatientToPatientDto(Patient patient) {
         return patient == null ? null : PatientDto.builder()
                 .id(patient.getId())
                 .age(patient.getAge())
@@ -25,7 +25,7 @@ public class ModelMapper {
     }
 
 
-    public Patient fromPatientDtoToPatient(PatientDto patientDto) {
+    static Patient fromPatientDtoToPatient(PatientDto patientDto) {
         return patientDto == null ? null : Patient.builder()
                 .id(patientDto.getId())
                 .age(patientDto.getAge())
@@ -38,7 +38,7 @@ public class ModelMapper {
                 .build();
     }
 
-    public DoctorDto fromDoctorToDoctorDto(Doctor doctor) {
+    static DoctorDto fromDoctorToDoctorDto(Doctor doctor) {
         return doctor == null ? null : DoctorDto.builder()
                 .id(doctor.getId())
                 .email(doctor.getEmail())
@@ -51,7 +51,7 @@ public class ModelMapper {
                 .build();
     }
 
-    public Doctor fromDoctorDtoToDoctor(DoctorDto doctorDto) {
+    static Doctor fromDoctorDtoToDoctor(DoctorDto doctorDto) {
         return doctorDto == null ? null : Doctor.builder()
                 .id(doctorDto.getId())
                 .email(doctorDto.getEmail())
@@ -64,7 +64,7 @@ public class ModelMapper {
                 .build();
     }
 
-    public VisitDto fromVisitToVisitDto(Visit visit){
+    static VisitDto fromVisitToVisitDto(Visit visit){
         return visit == null ? null : VisitDto.builder()
                 .date(visit.getDate())
                 .description(visit.getDescription())
@@ -74,7 +74,7 @@ public class ModelMapper {
                 .build();
     }
 
-    public Visit fromVisitDtoToVisit(VisitDto visitDto){
+    static Visit fromVisitDtoToVisit(VisitDto visitDto){
         return visitDto == null ? null : Visit.builder()
                 .date(visitDto.getDate())
                 .description(visitDto.getDescription())
