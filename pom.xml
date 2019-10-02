@@ -79,6 +79,11 @@
             <version>1.8.22</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-dep</artifactId>
+            <version>1.9.12</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -50,10 +50,13 @@ public class PatientService {
 
     public PatientDto deletePatient(Long id) {
         try {
+            System.out.println(id);
+            System.out.println(patientRepository.findById(id));
             Patient patient = patientRepository.findById(id).orElseThrow(NullPointerException::new);
             patientRepository.delete(patient);
             return ModelMapper.fromPatientToPatientDto(patient);
         }catch (Exception e) {
+            e.printStackTrace();
             log.error(e.getMessage());
             throw new MyException("DELETE PATIENT");
         }

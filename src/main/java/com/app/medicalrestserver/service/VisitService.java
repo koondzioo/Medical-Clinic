@@ -9,6 +9,7 @@ import com.app.medicalrestserver.model.Visit;
 import com.app.medicalrestserver.repository.VisitRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +19,13 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Component
 public class VisitService {
 
     private final VisitRepository visitRepository;
     private final PatientService patientService;
     private final DoctorService doctorService;
+
 
     public VisitDto addVisit(VisitDto visitDto) {
         try {
@@ -70,6 +73,7 @@ public class VisitService {
         try {
             return ModelMapper.fromVisitToVisitDto(visitRepository.findById(id).orElseThrow(NullPointerException::new));
         } catch (Exception e) {
+            e.printStackTrace();
             log.error(e.getMessage());
             throw new MyException("GET VISIT BY ID");
         }
